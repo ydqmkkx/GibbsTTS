@@ -10,7 +10,7 @@ class GibbsTTS_Model(nn.Module):
         super().__init__()
 
         self.n_vocab = configs.n_vocab
-        self.special_codebook_size = configs.special_codebook_size
+        self.special_codebook_size = configs.special_codebook_size  # special_codebook_size = 1, pad_id: self.codebook_size
         self.codebook_size = configs.codebook_size
         self.quantizers_num = configs.quantizers_num
         self.estimator = Decoder(configs)
@@ -64,7 +64,7 @@ class GibbsTTS_Model(nn.Module):
         return {f"dfm_loss": dfm_loss}, None
 
 
-    # def solver(self, t, h, x_t, logits):  
+    # def first_order_ctmc_solver(self, t, h, x_t, logits):  
     #     b, l, c = x_t.shape
     #     temp_flat = torch.arange(self.quantizers_num, device=x_t.device).view(1, 1, self.quantizers_num)
     #     idx_flat = temp_flat.expand(b, l, c).reshape(-1)
@@ -91,7 +91,6 @@ class GibbsTTS_Model(nn.Module):
     #         x_t[mask_jump] = torch.multinomial(probs, 1).squeeze(-1)
     #     return x_t
     
-
     def solver(self, t, h, x_t, logits):
         b, l, c = x_t.shape
         device = x_t.device
@@ -147,7 +146,7 @@ class GibbsTTS_Model(nn.Module):
         x_t = x_0.clone()
         x_t[:, :prompt_l, :] = prompt_token
         x_0 = x_0[:, prompt_l:, :]
-        mask = sequence_mask(torch.tensor(2 * [texts.shape[-1] + l], device=device), left_padded=True).unsqueeze(-1).float()   
+        mask = sequence_mask(torch.tensor(2 * b * [texts.shape[-1] + l], device=device), left_padded=True).unsqueeze(-1).float()   
 
         ts = torch.linspace(0, 1, steps=n_timesteps+1, device=device)
         xs = []

@@ -30,7 +30,6 @@ class MultiHeadAttention(nn.Module):
 
         self.qkv = nn.Linear(hidden_size, 3 * hidden_size, bias=False)
 
-        # from https://nn.labml.ai/transformers/rope/index.html
         self.rotary_pe = RotaryPositionalEmbeddings(self.head_dim)
 
         self.out_proj = nn.Linear(hidden_size, hidden_size)

@@ -15,14 +15,6 @@ def interp_table(t: torch.Tensor, table: torch.Tensor) -> torch.Tensor:
     y1 = table[idx1]
     return y0 * (1 - w) + y1 * w
 
-def decode_latents(hidden, weights):
-    hidden = F.normalize(hidden, dim=-1)
-    weights = F.normalize(weights, dim=-1)
-    diff = hidden.unsqueeze(3) - weights.unsqueeze(0).unsqueeze(0)  
-    dist = (diff ** 2).sum(-1)
-    indices = dist.argmin(-1)
-    return indices
-
 def random_mask(token_lengths, min_ratio=0., max_ratio=0.3):
     b = token_lengths.shape[0]
     r = torch.rand(b).to(token_lengths.device) * (max_ratio - min_ratio) + min_ratio

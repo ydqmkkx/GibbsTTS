@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from models.diffusion_transformer import DiTBlock, DiTFinalLayer
 
-    
+# reference: https://github.com/shivammehta25/Matcha-TTS/blob/main/matcha/models/components/decoder.py
 class SinusoidalPosEmb(nn.Module):
     def __init__(self, dim):
         super().__init__()
@@ -35,7 +35,6 @@ class TimestepEmbedding(nn.Module):
         return self.layer(x)
     
 
-# reference: https://github.com/shivammehta25/Matcha-TTS/blob/main/matcha/models/components/decoder.py
 class Decoder(nn.Module):
     def __init__(self, configs):
         super().__init__()

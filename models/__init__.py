@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchaudio
+from safetensors.torch import load_model
 
 from text import cleaned_text_to_sequence
 from text.phonemize import phonemize
@@ -36,7 +37,7 @@ class GibbsTTS(nn.Module):
         self.configs = configs
 
         self.model = GibbsTTS_Model(configs)
-        self.model.load_state_dict(torch.load(configs.infer_ckpt_path, map_location='cpu', weights_only=True))
+        load_model(self.model, configs.infer_ckpt_path)
         self.model = self.model.to(device)
         self.model.eval()
 
@@ -47,6 +48,7 @@ class GibbsTTS(nn.Module):
         self.language_dict = {"en": 0, "zh": 1, "mixed": 2}
         self.space_id = cleaned_text_to_sequence([" "])
 
+    @torch.no_grad()
     def synthesize(self, prompt_audio, prompt_text, target_text, language):
         prompt_phone, _ = phonemize(prompt_text)
         target_phone, _ = phonemize(target_text)

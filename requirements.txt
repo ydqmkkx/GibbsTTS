@@ -18,3 +18,5 @@ inflect
 einops
 scipy
 torchcodec
+datasets
+tensorboard

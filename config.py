@@ -4,7 +4,6 @@ from text import symbols
 
 @dataclass
 class ModelConfig:
-
     # model and train configs
     n_vocab: int = len(symbols) + 1
     n_lang: int = 3
@@ -35,14 +34,15 @@ class ModelConfig:
     num_workers: int = 8
 
     train: str = False
-    codebook_weights_path: str = '/work/gj36/e43018/DFM/amphion_utils/coarse_weights'
+    codebook_weights_path: str = './pretrained/codebook_embeds.pt'
     model_save_path: str = './checkpoints/tmp'
     log_dir: str = './runs/tmp'
     load_ckpt_path: str = None 
+    dataset_path: str = ''
 
     # infer configs
-    infer_ckpt_dir: str = '/home/sarulab/dong_yang/yd/DFM/ckpt'
-    infer_ckpt_path: str = '/home/sarulab/dong_yang/yd/DFM/ckpt/GibbsTTS_large_ema.pt'
+    infer_ckpt_dir: str = './pretrained'
+    infer_ckpt_path: str = './pretrained/GibbsTTS_large_ema.safetensors'
     steps: int = 32
     rescale_cfg: float = 0.75
     cfg: float = 2.5

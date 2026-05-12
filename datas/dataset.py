@@ -6,9 +6,10 @@ import numpy as np
 import os
 import random 
 from datasets import Dataset, concatenate_datasets
+
 class EmiliaShardSampler:
-    def __init__(self):
-        self.path = "/work/gj18/e43018/corpus/Emilia-zip1"
+    def __init__(self, dataset_path):
+        self.path = dataset_path
 
     def __call__(self, epoch, shard):
         arrows_en = os.listdir(f"{self.path}/en")
