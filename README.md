@@ -12,7 +12,7 @@ The released checkpoint was trained for about 46 hours on 32 NVIDIA H100 GPUs.
 2. For greater flexibility and to better fit the ARM-based GPU cluster ([Miyabi](https://www.cc.u-tokyo.ac.jp/en/supercomputer/miyabi/system.php)), the model architecture, training framework, and inference pipeline are built from scratch. \
 This makes the code easy to modify, but some implementation details, such as variable precision, may require extra care compared with mature training frameworks.
 
-3. For the open-source release, I have simplified the code and reduced the required packages as much as possible. \
+3. For the open-source release, I have simplified the code and reduced the required packages as much as possible.
 If you encounter any bugs, please open an issue.
 
 4. The model was trained on the [Emilia-en/zh](https://huggingface.co/datasets/amphion/Emilia-Dataset), so it only supports English and Chinese Mandarin now. \
@@ -58,7 +58,7 @@ language = "en"
 
 audio = model.synthesize(prompt_audio=prompt_audio, prompt_text=prompt_text, target_text=target_text, language=language)
 
-sf.write(f'target.wav', audio, 24000, 'PCM_24')
+sf.write('target.wav', audio, 24000, 'PCM_24')
 Audio(data=audio, rate=24000) 
 
 ```
@@ -72,7 +72,7 @@ language = "zh"
 
 audio = model.synthesize(prompt_audio=prompt_audio, prompt_text=prompt_text, target_text=target_text, language=language)
 
-sf.write(f'target.wav', audio, 24000, 'PCM_24')
+sf.write('target.wav', audio, 24000, 'PCM_24')
 Audio(data=audio, rate=24000) 
 ```
 
@@ -87,7 +87,7 @@ language = "mixed"
 
 audio = model.synthesize(prompt_audio=prompt_audio, prompt_text=prompt_text, target_text=target_text, language=language)
 
-sf.write(f'target.wav', audio, 24000, 'PCM_24')
+sf.write('target.wav', audio, 24000, 'PCM_24')
 Audio(data=audio, rate=24000) 
 ```
 
