@@ -20,7 +20,7 @@ A Japanese fine-tuned version will be trained these days.
 
 5. Data cleaning scripts and training examples will also be released gradually.
 
-Contact: I am currently seeking full-time positions in speech, audio, or multi-modal generative modeling.
+Contact: I am currently seeking full-time positions in speech, audio, or multimodal generative modeling.
 If you are interested in this work, please feel free to visit my [homepage](https://ydqmkkx.github.io/) for more information.
 
 
