@@ -1,6 +1,8 @@
 # GibbsTTS
-Official PyTorch implementation of the paper: Kinetic-Optimal Scheduling with Moment Correction for Metric-Induced Discrete Flow Matching in Zero-Shot Text-to-Speech \
-<a href='https://ydqmkkx.github.io/GibbsTTSProject/'><img src='https://img.shields.io/badge/Demo-blue'></a>
+Official PyTorch implementation of the paper: \
+Kinetic-Optimal Scheduling with Moment Correction for Metric-Induced Discrete Flow Matching in Zero-Shot Text-to-Speech \
+<a href='https://ydqmkkx.github.io/GibbsTTSProject/'><img src='https://img.shields.io/badge/Demo-blue'></a> \
+(Updating)
 
 ## Environment and installation
 1. Python >= 3.9, Python 3.10 and 3.12 are recommended.
@@ -21,7 +23,7 @@ or download the safetensors files via the [huggingface page](https://huggingface
 The codec weights are from [MaskGCT](https://huggingface.co/amphion/MaskGCT/tree/main/acoustic_codec).
 
 ## Quick start
-```bash
+```python
 from models import GibbsTTS
 from config import ModelConfig
 from IPython.display import Audio
