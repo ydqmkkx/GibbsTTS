@@ -1,0 +1,20 @@
+# torch
+# torchaudio
+
+safetensors
+huggingface_hub
+
+tqdm
+numpy
+soundfile
+
+pypinyin
+jieba
+
+eng_to_ipa
+unidecode
+inflect
+
+einops
+scipy
+torchcodec
