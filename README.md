@@ -1,8 +1,11 @@
 # GibbsTTS
 Official PyTorch implementation of the paper: \
 Kinetic-Optimal Scheduling with Moment Correction for Metric-Induced Discrete Flow Matching in Zero-Shot Text-to-Speech \
-<a href='https://arxiv.org/abs/2605.09386'><img src='https://img.shields.io/badge/arXiv-red'></a>
-<a href='https://ydqmkkx.github.io/GibbsTTSProject/'><img src='https://img.shields.io/badge/Demo-blue'></a> \
+<a href='https://arxiv.org/abs/2605.09386'><img src='https://img.shields.io/badge/arXiv-2605.09386-red'></a>
+<a href='https://ydqmkkx.github.io/GibbsTTSProject/'><img src='https://img.shields.io/badge/Demo-blue'></a>
+<a href='https://huggingface.co/spaces/ydqmkkx/GibbsTTS'>
+  <img src='https://img.shields.io/badge/🤗%20Interactive%20Demo-Hugging%20Face-yellow'>
+</a> \
 (Updating)
 
 ## Overview
