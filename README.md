@@ -36,7 +36,7 @@ pip install -r requirements.txt
 
 ## Using WebUI
 The WebUI uses the same script as the [interactive demo](https://huggingface.co/spaces/ydqmkkx/GibbsTTS).
-```python
+```bash
 python webui.py
 ```
 
