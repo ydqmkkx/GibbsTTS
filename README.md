@@ -11,7 +11,7 @@ Kinetic-Optimal Scheduling with Moment Correction for Metric-Induced Discrete Fl
 </a>
 
 ## Overview
-1. The released checkpoint was trained on the [Emilia](https://huggingface.co/datasets/amphion/Emilia-Dataset)-EN/ZH, for about 46 hours using 32 NVIDIA H100 GPUs. \
+1. The released 0.4B checkpoint was trained on the [Emilia](https://huggingface.co/datasets/amphion/Emilia-Dataset)-EN/ZH, for about 46 hours using 32 NVIDIA H100 GPUs. \
 The Japanese LoRA checkpoint was fine-tuned on the Emilia-JA and Emilia-[Yodas](https://huggingface.co/datasets/espnet/yodas)-JA, for about 70 mins using 32 GPUs.
 
 2. For greater flexibility and to better fit the ARM-based GPU cluster ([Miyabi](https://www.cc.u-tokyo.ac.jp/en/supercomputer/miyabi/system.php)), the model architecture, training framework, and inference pipeline are built from scratch. \
