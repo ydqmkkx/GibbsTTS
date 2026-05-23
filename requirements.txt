@@ -15,8 +15,13 @@ eng_to_ipa
 unidecode
 inflect
 
+pyopenjtalk
+
 einops
 scipy
 torchcodec
 datasets
 tensorboard
+
+transformers
+gradio

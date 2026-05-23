@@ -44,7 +44,16 @@ class ModelConfig:
     infer_ckpt_dir: str = './pretrained'
     infer_ckpt_path: str = './pretrained/GibbsTTS_large_ema.safetensors'
     steps: int = 32
+    speed: float = 1.
     rescale_cfg: float = 0.75
     cfg: float = 2.5
     temperature: float = 0.6
     top_p: float = 1.
+
+@dataclass
+class LoRAConfig:
+    load_ckpt_path: str = None
+    infer_ckpt_path: str = "./pretrained/GibbsTTS_lora_ja.safetensors"
+    r: int = 32
+    alpha: int = 64
+    dropout: float = 0.

@@ -1,27 +1,24 @@
-# GibbsTTS
-Official PyTorch implementation of the paper: \
+# GibbsTTS: a zero-shot voice cloning TTS model
+GibbsTTS is a zero-shot text-to-speech model based on metric-induced discrete flow matching, incorporating the proposed kinetic-optimal scheduler and finite-step moment correction. \
+This is the official PyTorch implementation of the paper: \
 Kinetic-Optimal Scheduling with Moment Correction for Metric-Induced Discrete Flow Matching in Zero-Shot Text-to-Speech \
 <a href='https://arxiv.org/abs/2605.09386'><img src='https://img.shields.io/badge/arXiv-2605.09386-red'></a>
 <a href='https://ydqmkkx.github.io/GibbsTTSProject/'><img src='https://img.shields.io/badge/Demo-blue'></a>
 <a href='https://huggingface.co/spaces/ydqmkkx/GibbsTTS'>
   <img src='https://img.shields.io/badge/🤗%20Interactive%20Demo-Hugging%20Face-yellow'>
-</a> \
-(Updating)
+</a>
 
 ## Overview
-1. GibbsTTS is a zero-shot text-to-speech model based on metric-induced discrete flow matching, incorporating the proposed kinetic-optimal scheduler and finite-step CTMC correction. \
-The released checkpoint was trained for about 46 hours on 32 NVIDIA H100 GPUs.
+1. The released checkpoint was trained on the [Emilia](https://huggingface.co/datasets/amphion/Emilia-Dataset)-EN/ZH, for about 46 hours using 32 NVIDIA H100 GPUs. \
+The Japanese LoRA checkpoint was fine-tuned on the Emilia-JA and Emilia-[Yodas](https://huggingface.co/datasets/espnet/yodas)-JA, for about 70 mins using 32 GPUs.
 
-2. For greater flexibility and to better fit the ARM-based GPU cluster ([Miyabi](https://www.cc.u-tokyo.ac.jp/en/supercomputer/miyabi/system.php)), the model architecture, training framework, and inference pipeline are built from scratch. \
+2. The model supports English, Chinese Mandarin, and Japanese (LoRA fine-tuned), also supports cross-lingual synthesis.
+
+3. For greater flexibility and to better fit the ARM-based GPU cluster ([Miyabi](https://www.cc.u-tokyo.ac.jp/en/supercomputer/miyabi/system.php)), the model architecture, training framework, and inference pipeline are built from scratch. \
 This makes the code easy to modify, but some implementation details, such as variable precision, may require extra care compared with mature training frameworks.
 
-3. For the open-source release, I have simplified the code and reduced the required packages as much as possible.
+4. For the open-source release, I have simplified the code and reduced the required packages as much as possible.
 If you encounter any bugs, please open an issue.
-
-4. The model was trained on the [Emilia-en/zh](https://huggingface.co/datasets/amphion/Emilia-Dataset), so it only supports English and Chinese Mandarin now. \
-A Japanese fine-tuned version will be trained these days.
-
-5. Data cleaning scripts and training examples will also be released gradually.
 
 Contact: I am currently seeking full-time positions in speech, audio, or multimodal generative modeling.
 If you are interested in this work, please feel free to visit my [homepage](https://ydqmkkx.github.io/) for more information.
@@ -37,7 +34,14 @@ cd GibbsTTS
 pip install -r requirements.txt
 ```
 
-## Download pre-trained weights
+## Using WebUI
+The WebUI uses the same script as the [interactive demo](https://huggingface.co/spaces/ydqmkkx/GibbsTTS).
+```python
+python webui.py
+```
+
+## Start without WebUI
+### Download pre-trained weights
 Use ```hf download```
 ```bash
 hf download ydqmkkx/GibbsTTS --local-dir ./pretrained --include "*.safetensors"
@@ -45,56 +49,57 @@ hf download ydqmkkx/GibbsTTS --local-dir ./pretrained --include "*.safetensors"
 or download the safetensors via the [huggingface page](https://huggingface.co/ydqmkkx/GibbsTTS/tree/main). \
 The codec weights are from [MaskGCT](https://huggingface.co/amphion/MaskGCT/tree/main/acoustic_codec).
 
-## Quick start
+### Find more examples in samples.ipynb
 ```python
 from models import GibbsTTS
-from config import ModelConfig
-from IPython.display import Audio
+from config import ModelConfig, LoRAConfig
 import soundfile as sf
 
 configs = ModelConfig()
 model = GibbsTTS(configs)
-```
-English:
-```python
+
+# English:
 prompt_audio = "./prompt_examples/common_voice_en_188092-common_voice_en_188093.wav"
 prompt_text = "This man looked exactly the same, except that now the roles were reversed."
 target_text = "He also tried to remember some good stories to relate as he sheared the sheep."
-language = "en"
+prompt_lang = "en"
+target_lang = "en"
 
-audio = model.synthesize(prompt_audio=prompt_audio, prompt_text=prompt_text, target_text=target_text, language=language)
+audio = model.synthesize(prompt_audio=prompt_audio, prompt_text=prompt_text, target_text=target_text, prompt_lang=prompt_lang, target_lang=target_lang)
+sf.write(f'en.wav', audio, 24000, 'PCM_24')
 
-sf.write('target.wav', audio, 24000, 'PCM_24')
-Audio(data=audio, rate=24000) 
-
-```
-
-Chinese Mandarin:
-```python
+# Chinese Mandarin:
 prompt_audio = "./prompt_examples/00005476-00000047.wav"
 prompt_text = "该委员会的角色，类似新总统的亲友团或后援团。"
 target_text = "上发条的弹簧钟发明之前，没有准点时间来确保远程航行的安全。"
-language = "zh"
+prompt_lang = "zh"
+target_lang = "zh"
 
-audio = model.synthesize(prompt_audio=prompt_audio, prompt_text=prompt_text, target_text=target_text, language=language)
+audio = model.synthesize(prompt_audio=prompt_audio, prompt_text=prompt_text, target_text=target_text, prompt_lang=prompt_lang, target_lang=target_lang)
+sf.write(f'zh.wav', audio, 24000, 'PCM_24')
 
-sf.write('target.wav', audio, 24000, 'PCM_24')
-Audio(data=audio, rate=24000) 
-```
-
-A very small proportion of the training data contains mixed English-Chinese sentences, which are labeled as `mixed`. \
-Under this setting, the model can synthesize mixed English-Chinese sentences, and cross-lingual synthesis is also handled in the same way. \
-Since such data is rare in the training set, this functionality has not been specifically optimized or evaluated. It is provided for experimentation and fun.
-```python
+# Cross-lingual: English to Chinese
 prompt_audio = "./prompt_examples/common_voice_en_188092-common_voice_en_188093.wav"
 prompt_text = "This man looked exactly the same, except that now the roles were reversed."
-target_text = "我做完这个pre，你帮我download点document。O不OK？"
-language = "mixed"
+target_text = "上发条的弹簧钟发明之前，没有准点时间来确保远程航行的安全。"
+prompt_lang = "en"
+target_lang = "zh"
 
-audio = model.synthesize(prompt_audio=prompt_audio, prompt_text=prompt_text, target_text=target_text, language=language)
+audio = model.synthesize(prompt_audio=prompt_audio, prompt_text=prompt_text, target_text=target_text, prompt_lang=prompt_lang, target_lang=target_lang)
+sf.write(f'en2zh.wav', audio, 24000, 'PCM_24')
 
-sf.write('target.wav', audio, 24000, 'PCM_24')
-Audio(data=audio, rate=24000) 
+# Japanese
+configs.lora = LoRAConfig()
+model = GibbsTTS(configs)
+
+prompt_audio = "./prompt_examples/prompt_audio_1.wav"
+prompt_text = "この料理は家庭で作れます。"
+target_text = "アラバマ州の最大都市はバーミングハムである"
+prompt_lang = "ja"
+target_lang = "ja"
+
+audio = model.synthesize(prompt_audio=prompt_audio, prompt_text=prompt_text, target_text=target_text, prompt_lang=prompt_lang, target_lang=target_lang)
+sf.write(f'ja.wav', audio, 24000, 'PCM_24')
 ```
 
 ## Kinetic-optimal scheduler
