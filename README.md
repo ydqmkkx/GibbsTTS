@@ -1,5 +1,7 @@
 # GibbsTTS: a zero-shot voice cloning TTS model
 GibbsTTS is a zero-shot text-to-speech model based on metric-induced discrete flow matching, incorporating the proposed kinetic-optimal scheduler and finite-step moment correction. \
+It supports English, Chinese Mandarin, and Japanese (LoRA fine-tuned), also supports cross-lingual synthesis.
+
 This is the official PyTorch implementation of the paper: \
 Kinetic-Optimal Scheduling with Moment Correction for Metric-Induced Discrete Flow Matching in Zero-Shot Text-to-Speech \
 <a href='https://arxiv.org/abs/2605.09386'><img src='https://img.shields.io/badge/arXiv-2605.09386-red'></a>
@@ -12,12 +14,10 @@ Kinetic-Optimal Scheduling with Moment Correction for Metric-Induced Discrete Fl
 1. The released checkpoint was trained on the [Emilia](https://huggingface.co/datasets/amphion/Emilia-Dataset)-EN/ZH, for about 46 hours using 32 NVIDIA H100 GPUs. \
 The Japanese LoRA checkpoint was fine-tuned on the Emilia-JA and Emilia-[Yodas](https://huggingface.co/datasets/espnet/yodas)-JA, for about 70 mins using 32 GPUs.
 
-2. The model supports English, Chinese Mandarin, and Japanese (LoRA fine-tuned), also supports cross-lingual synthesis.
-
-3. For greater flexibility and to better fit the ARM-based GPU cluster ([Miyabi](https://www.cc.u-tokyo.ac.jp/en/supercomputer/miyabi/system.php)), the model architecture, training framework, and inference pipeline are built from scratch. \
+2. For greater flexibility and to better fit the ARM-based GPU cluster ([Miyabi](https://www.cc.u-tokyo.ac.jp/en/supercomputer/miyabi/system.php)), the model architecture, training framework, and inference pipeline are built from scratch. \
 This makes the code easy to modify, but some implementation details, such as variable precision, may require extra care compared with mature training frameworks.
 
-4. For the open-source release, I have simplified the code and reduced the required packages as much as possible.
+3. For the open-source release, I have simplified the code and reduced the required packages as much as possible.
 If you encounter any bugs, please open an issue.
 
 Contact: I am currently seeking full-time positions in speech, audio, or multimodal generative modeling.
