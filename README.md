@@ -10,18 +10,19 @@ Kinetic-Optimal Scheduling with Moment Correction for Metric-Induced Discrete Fl
   <img src='https://img.shields.io/badge/🤗%20Interactive%20Demo-Hugging%20Face-yellow'>
 </a>
 
+Contact: I am currently seeking full-time positions in speech, audio, or multimodal generative modeling.
+If you are interested in this work, please feel free to visit my [homepage](https://ydqmkkx.github.io/) for more information.
+
 ## Overview
 1. The released 0.4B checkpoint was trained on the [Emilia](https://huggingface.co/datasets/amphion/Emilia-Dataset)-EN/ZH, for about 46 hours using 32 NVIDIA H100 GPUs. \
-The Japanese LoRA checkpoint was fine-tuned on the Emilia-JA and Emilia-[Yodas](https://huggingface.co/datasets/espnet/yodas)-JA, for about 70 mins using 32 GPUs.
+The Japanese LoRA checkpoint was fine-tuned on the Emilia-JA and Emilia-[Yodas](https://huggingface.co/datasets/espnet/yodas)-JA, for about 70 mins using 32 GPUs. \
+(Japanese-to-English/Chinese synthesis may not work because the non-fine-tuned checkpoint is used, which was not trained on Japanese data.)
 
 2. For greater flexibility and to better fit the ARM-based GPU cluster ([Miyabi](https://www.cc.u-tokyo.ac.jp/en/supercomputer/miyabi/system.php)), the model architecture, training framework, and inference pipeline are built from scratch. \
 This makes the code easy to modify, but some implementation details, such as variable precision, may require extra care compared with mature training frameworks.
 
 3. For the open-source release, I have simplified the code and reduced the required packages as much as possible.
 If you encounter any bugs, please open an issue.
-
-Contact: I am currently seeking full-time positions in speech, audio, or multimodal generative modeling.
-If you are interested in this work, please feel free to visit my [homepage](https://ydqmkkx.github.io/) for more information.
 
 
 ## Environment and installation
