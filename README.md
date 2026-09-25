@@ -4,6 +4,8 @@ It supports English, Chinese Mandarin, and Japanese (LoRA fine-tuned), also supp
 
 This is the official PyTorch implementation of the paper: \
 Kinetic-Optimal Scheduling with Moment Correction for Metric-Induced Discrete Flow Matching in Zero-Shot Text-to-Speech \
+(🎉 The paper has been accepted by NeurIPS 2026 🎉) 
+
 <a href='https://arxiv.org/abs/2605.09386'><img src='https://img.shields.io/badge/arXiv-2605.09386-red'></a>
 <a href='https://ydqmkkx.github.io/GibbsTTSProject/'><img src='https://img.shields.io/badge/Demo-blue'></a>
 <a href='https://huggingface.co/spaces/ydqmkkx/GibbsTTS'>
@@ -120,11 +122,11 @@ The standard first-order CTMC solver is also provided.
 ## Citation
 ```bibtex
 This work:
-@article{GibbsTTS,
+@inproceedings{GibbsTTS,
  author    = {Dong Yang and Yiyi Cai and Haoyu Zhang and Yuki Saito and Hiroshi Saruwatari},
  title     = {Kinetic-Optimal Scheduling with Moment Correction for Metric-Induced Discrete Flow Matching in Zero-Shot Text-to-Speech},
  year      = {2026},
- journal   = {arXiv preprint arXiv:2605.09386},
+ journal   = {Annual Conference on Neural Information Processing Systems (NeurIPS)},
 }
 
 Codec we use:
