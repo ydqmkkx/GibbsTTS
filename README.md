@@ -115,7 +115,7 @@ The standard first-order CTMC solver is also provided.
 
 ## Acknowledgements
 1. We improve and use the text frontend of [StableTTS](https://github.com/KdaiP/StableTTS).
-2. For the implementation of masked discrete flow matching, we refer to its [implementation](https://github.com/RobinKa/discrete-flow-matching-pytorch) and [DiFlow-TTS](https://github.com/ishine/DiFlow-TTS).
+2. For the implementation of masked discrete flow matching, we refer to its [implementation](https://github.com/RobinKa/discrete-flow-matching-pytorch) and [DiFlow-TTS](https://github.com/Fsoft-AIC/DiFlowTTS).
 3. For the implementation of masked discrete diffusion, we refer to [MaskGCT](https://github.com/open-mmlab/Amphion/tree/main/models/tts/maskgct).
 
 
